@@ -1,4 +1,4 @@
-# 📝 FRONTEND: Tutolin
+# 📝 BACKEND: Tutolin
 
 ## Instalación
 
@@ -8,7 +8,7 @@ Clonar el presente repositorio en el directorio de su agrado con la siguiente l�
 git clone https://github.com/aleeMR/PJ-Tutolin.git
 ```
 
-Ingresar a la carpeta `...\frontend` de la dirección donde se encuentra ubicado el proyecto y ejecutar el comando:
+Ingresar a la carpeta `...\backend` de la dirección donde se encuentra ubicado el proyecto y ejecutar el comando:
 
 ```
 npm install

@@ -9,7 +9,7 @@ require('dotenv').config();
 
 // Settings (Configuraciones)
 // ---------------------------------------------------------------
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 4000);
 
 // Middlewares (Programas intermedios)
 // ---------------------------------------------------------------
