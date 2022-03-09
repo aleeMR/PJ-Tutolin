@@ -19,7 +19,7 @@ npm install
 Finalmente, para levantar el proyecto en su máquina local, ejecutar el siguiente comando en la misma dirección anterior:
 
 ```
-npm start
+npm run start
 ```
 
 ## Dependencias
