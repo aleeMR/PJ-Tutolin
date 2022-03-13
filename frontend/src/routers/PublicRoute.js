@@ -1,14 +1,18 @@
-import { Navigate, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+
+// Auths
 import useAuth from '../auth/useAuth';
 
-function PublicRoute(props) {
+// Helpers
+import routes from '../helpers/routes';
+
+function PublicRoute({ children }) {
     const { isLogged } = useAuth();
 
-    if (isLogged()) return <Navigate to="/tutors"/>
+    if (isLogged()) 
+        return <Navigate to={routes.home} replace/>
 
-    return (
-        <Route {...props}/>
-    );
+    return children;
 }
         
 export default PublicRoute;

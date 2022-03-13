@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-1: #54BAB9;
+  --color-2: #42A6A4;
+  --color-3: #3D9997;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,7 +17,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.text-color-1 {
+  color: var(--color-1);
+}
+
+.text-color-2 {
+  color: var(--color-2);
+}
+
+.bg-color-2 {
+  background-color: var(--color-2);
+}
+
+.bg-color-3, .bg-color-2:hover {
+  background-color: var(--color-3);
 }

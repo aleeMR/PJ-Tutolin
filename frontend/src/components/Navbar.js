@@ -1,28 +1,26 @@
 // Importación de rutas
 import routes from '../helpers/routes';
+import Button from './Button';
 import NavbarOption from './NavbarOption';
+
 
 const Navbar = () => {
 return (
-    <header class="text-gray-600 body-font">
-        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <header class="text-gray-600 body-font bg-gray-100">
+        <div class="container mx-auto flex flex-wrap px-5 py-3 flex-col md:flex-row items-center">
             <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-                <img class="w-10" src={require("../assets/img/logo_icono.png")} alt="tutolin"/>
+                <img class="w-10" src={require("../assets/img/logo_icono.png")} alt="logo"/>
                 <span class="ml-3 text-xl">
                     TUTOLIN
                 </span>
             </a>
-            <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+            <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 	flex flex-wrap items-center text-base justify-center">
                 <NavbarOption link={routes.home} option="Inicio"/>
                 <NavbarOption link={routes.tutors} option="Tutores"/>
                 <NavbarOption link={routes.services} option="Servicios"/>
             </nav>
-            <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
-                Iniciar Sesión
-            </button>
-            <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
-                Regístrate
-            </button>
+            <Button link={routes.login} style="bg-gray-200 hover:bg-gray-300 px-3 py-2 mr-2" option="Iniciar Sesión"/>
+            <Button link={routes.register} style="text-white bg-color-2 px-3 py-2" option="Regístrate"/>
         </div>
     </header>
 )}

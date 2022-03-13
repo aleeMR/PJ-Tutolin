@@ -1,10 +1,11 @@
-import { createContext } from "react";
-import { useState } from "react";
+import { createContext } from 'react';
+import { useState } from 'react';
 
 // Helpers
 import roles from '../helpers/roles';
 
 export const AuthContext = createContext();
+
 
 function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
@@ -24,8 +25,8 @@ function AuthProvider({ children }) {
     };
 
     return (
-        <AuthContext.Provider value={contextValue}>
-            {children}
+        <AuthContext.Provider value={ contextValue }>
+            { children }
         </AuthContext.Provider>
     );
 }
