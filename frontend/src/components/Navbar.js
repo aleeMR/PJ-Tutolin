@@ -3,7 +3,6 @@ import routes from '../helpers/routes';
 import Button from './Button';
 import NavbarOption from './NavbarOption';
 
-
 const Navbar = () => {
 return (
     <header class="text-gray-600 body-font bg-gray-100">
@@ -19,8 +18,8 @@ return (
                 <NavbarOption link={routes.tutors} option="Tutores"/>
                 <NavbarOption link={routes.services} option="Servicios"/>
             </nav>
-            <Button link={routes.login} style="bg-gray-200 hover:bg-gray-300 px-3 py-2 mr-2" option="Iniciar Sesión"/>
-            <Button link={routes.register} style="text-white bg-color-2 px-3 py-2" option="Regístrate"/>
+            <Button link={routes.login} extra="bg-gray-200 hover:bg-gray-300 px-3 py-2 mr-2" option="Iniciar Sesión"/>
+            <Button link={routes.register} extra="text-white bg-color-2 px-3 py-2" option="Regístrate"/>
         </div>
     </header>
 )}

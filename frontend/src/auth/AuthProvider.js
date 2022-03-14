@@ -6,7 +6,6 @@ import roles from '../helpers/roles';
 
 export const AuthContext = createContext();
 
-
 function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
 
