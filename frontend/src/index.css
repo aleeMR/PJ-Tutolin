@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+
 :root {
   --color-1: #54BAB9;
   --color-2: #42A6A4;
@@ -15,6 +17,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.text-logo {
+  font-family: 'Concert One', cursive;
 }
 
 .text-color-1 {
