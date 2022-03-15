@@ -11,6 +11,7 @@ import PrivateRoute from './routers/PrivateRoute';
 // Páginas Generales
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 // Layouts del Cliente
 import LayoutClient from './layouts/LayoutClient';
@@ -22,7 +23,7 @@ function AppRouter() {
         <Routes>
           <Route exact path={routes.home} element={<HomePage />}/>
           <Route exact path={routes.login} element={<PublicRoute><LoginPage /></PublicRoute>}/>
-          <Route exact path={routes.register} element={<PublicRoute>"RegisterPage"</PublicRoute>}/>
+          <Route exact path={routes.register} element={<PublicRoute><RegisterPage /></PublicRoute>}/>
 
           <Route exact path={routes.tutors} element="TutorsPage"/>
           <Route exact path={routes.tutor()} element="TutorPerfil"/>
