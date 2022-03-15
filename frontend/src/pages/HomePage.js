@@ -31,7 +31,7 @@ const HomePage = () => {
                                     y comienza a reforzar tus conocimientos.
                                 </p>
                                 <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                                    <Button link={routes.services} extra="font-medium text-white bg-color-2 px-8 py-3 md:py-4 md:text-lg md:px-10" option="EXPLORAR" />
+                                    <Button link={routes.services} style_button="inline-flex items-center font-medium text-white bg-color-2 px-8 py-3 md:py-4 md:text-lg md:px-10" option="EXPLORAR" />
                                 </div>
                             </div>
                         </div>

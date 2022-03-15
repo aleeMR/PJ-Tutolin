@@ -8,7 +8,7 @@ import routes from './helpers/routes';
 import PublicRoute from './routers/PublicRoute';
 import PrivateRoute from './routers/PrivateRoute';
 
-// Rutas Generales
+// Páginas Generales
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 
@@ -20,8 +20,8 @@ function AppRouter() {
     <Router>
       <LayoutClient>
         <Routes>
-          <Route exact path={routes.home} element={<HomePage/>}/>
-          <Route exact path={routes.login} element={<PublicRoute><LoginPage/></PublicRoute>}/>
+          <Route exact path={routes.home} element={<HomePage />}/>
+          <Route exact path={routes.login} element={<PublicRoute><LoginPage /></PublicRoute>}/>
           <Route exact path={routes.register} element={<PublicRoute>"RegisterPage"</PublicRoute>}/>
 
           <Route exact path={routes.tutors} element="TutorsPage"/>
