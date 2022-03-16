@@ -11,7 +11,20 @@ router.get('/', async (req, res) => {
 
 // Método para crear servicios
 router.post('/', async (req, res) => {
-    console.log(req.body);
+    const {
+        title,
+        description,
+        price
+    } = req.body;
+
+    const service = new Service({
+        title,
+        description,
+        price
+    });
+    await service.save();
+
+    res.json({status: 'Servicio creado exitosamente.'});
 });
 
 module.exports = router;
