@@ -15,6 +15,9 @@ const ServiceSchema = new Schema({
         type: Number,
         required: true
     }
+}, {
+    timestamps: true,
+    versionKey: false
 });
 
 module.exports = mongoose.model('Service', ServiceSchema);

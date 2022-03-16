@@ -1,4 +1,3 @@
-
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
@@ -23,6 +22,8 @@ app.use(express.json());
 
 // Routes (Rutas)
 // ---------------------------------------------------------------
+app.use('/api/auth', require('./routes/auth.routes'));
+app.use('/api/users', require('./routes/user.routes'));
 app.use('/api/services', require('./routes/service.routes'));
 
 // Static files (Archivos estáticos)
