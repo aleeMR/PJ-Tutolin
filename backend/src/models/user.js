@@ -36,8 +36,8 @@ UserSchema.method({
         return bcrypt.hashSync(password, salt);
     },
     // Método para comparar contraseña cifrada
-    comparePassword: function (password, receivePassword) {
-        return bcrypt.compareSync(password, receivePassword);
+    comparePassword: function (receivePassword, password) {
+        return bcrypt.compareSync(receivePassword, password);
     }
 });
 
