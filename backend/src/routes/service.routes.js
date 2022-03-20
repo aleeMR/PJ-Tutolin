@@ -1,13 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const Service = require('../models/service');
+const ServiceCtrl = require('../controllers/service.controller');
 
-// Método para traer todos los servicios
-router.get('/', async (req, res) => {
-    const services = await Service.find();
-    res.json(services);
-});
+// Método para listar todos los servicios
+router.get('/', ServiceCtrl.listServices);
 
 // Método para crear servicios
 router.post('/', async (req, res) => {
