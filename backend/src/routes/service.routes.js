@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+// Importando middlewares
 const { verifyToken } = require('../middlewares/verifyToken');
+// Importando controladores
 const ServiceCtrl = require('../controllers/service.controller');
 
 // Método para listar todos los servicios

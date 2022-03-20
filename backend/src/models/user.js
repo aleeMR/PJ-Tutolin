@@ -12,6 +12,9 @@ const UserSchema = new Schema({
         type: String, 
         required: true 
     },
+    document: {
+        type: String
+    },
     image: {
         type: String
     },
