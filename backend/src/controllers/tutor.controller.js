@@ -11,7 +11,7 @@ const createTutor = async (req, res) => {
         biography
     } = req.body;
 
-    const tutor = new Service({
+    const tutor = new Tutor({
         name,
         surname,
         document,
