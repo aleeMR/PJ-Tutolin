@@ -28,6 +28,18 @@ const createTutor = async (req, res) => {
     });
 };
 
+// Método para listar todos los tutores
+const listTutors = async (req, res) => {
+    // Obtenemos todos los servicios registrados
+    const tutors = await Tutor.find();
+
+    res.status(200).json({
+        tutors,
+        msg: "Tutores cargados exitosamente."
+    });
+};
+
 module.exports = {
-    createTutor
+    createTutor,
+    listTutors
 }
