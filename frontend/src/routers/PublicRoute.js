@@ -10,9 +10,9 @@ function PublicRoute({ children }) {
     const { isLogged } = useAuth();
 
     if (isLogged()) 
-        return <Navigate to={routes.home} replace/>
+        return <Navigate to={ routes.home } replace />
 
     return children;
-}
+};
         
 export default PublicRoute;

@@ -3,6 +3,6 @@ import { AuthContext } from "./AuthProvider";
 
 function useAuth() {
     return useContext(AuthContext);
-}
+};
         
 export default useAuth;

@@ -1,5 +1,5 @@
 const roles = {
-    client: 'client',
+    student: 'student',
     tutor: 'tutor'
 };
 
