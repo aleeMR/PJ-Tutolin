@@ -14,7 +14,7 @@ const signin = async (req, res) => {
     // Si el usuario no está registrado
     if (!user)
         return res.status(400).json({
-            msg: "Correo electrónico no registrado."
+            msg: "Usuario no registrado."
         });
     // Si el usuario está registrado, se verifica la contraseña
     const match = user.comparePassword(password, user.password)
@@ -22,10 +22,10 @@ const signin = async (req, res) => {
     // Si la contraseña no coincide
     if (!match)
         return res.status(400).json({
-            msg: "Contraseña incorrecta."
+            msg: "Correo electrónico o contraseña incorrecta."
         });
     // Si la contraseña coincide
-    const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
     res.status(200).json({
         user,
