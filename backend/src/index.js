@@ -1,17 +1,22 @@
 const express = require('express');
+const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');
 
 const { mongoose } = require('./database');
 
-const app = express();
-
 // Environment Variables (Variables de entorno)
 require('dotenv').config();
+
+const app = express();
+const whiteList = [process.env.HTTP];
 
 // Settings (Configuraciones)
 // ---------------------------------------------------------------
 app.set('port', process.env.PORT || 4000);
+
+// Allow origin HTTP
+app.use(cors({ origin: whiteList }));
 
 // Middlewares (Programas intermedios)
 // ---------------------------------------------------------------

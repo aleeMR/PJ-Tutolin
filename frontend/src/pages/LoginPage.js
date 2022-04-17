@@ -23,24 +23,24 @@ const LoginPage = () => {
         });
     };
 
+    const userCredentials = body;
     const onSubmit = () => {
-        console.log(body)
-        login(userCredentials, location.state?.from);
-
         fetch('http://localhost:4000/api/auth/signin', {
             mode: 'cors',
             method: 'POST',
-            body: JSON.stringify(body),
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
         })
-            .then(res => console.log(res))
+            .then(async (res) => {
+                if (res.ok)
+                    login(userCredentials, location.state?.from);
+                console.log(await res.json())
+            })
             .catch(err => console.error(err));
     };
-
-    const userCredentials = {};
 
     return (
         <section class="text-gray-600 body-font">
