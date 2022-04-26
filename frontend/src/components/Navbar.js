@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 // Importación de rutas
 import routes from '../helpers/routes';
 import useAuth from '../auth/useAuth';
@@ -19,8 +21,12 @@ const Navbar = () => {
                     <Option link={routes.tutors} style_link="mr-5 text-gray-400 hover:text-gray-900" option="Tutores" />
                     <Option link={routes.services} style_link="mr-5 text-gray-400 hover:text-gray-900" option="Servicios" />
                 </nav>
-                <Button link={routes.login} style_extra="mr-2 mt-4 md:mt-0" style_button="inline-flex items-center bg-gray-200 hover:bg-gray-300 px-3 py-2" option="Iniciar Sesión" />
-                <Button link={routes.register} style_extra="mr-2 mt-4 md:mt-0" style_button="inline-flex items-center text-white bg-color-2 px-3 py-2" option="Regístrate" />
+                <Link to={ routes.login }>
+                    <Button style_extra="mr-2 mt-4 md:mt-0" style_button="inline-flex items-center bg-gray-200 hover:bg-gray-300 px-3 py-2" option="Iniciar Sesión" />
+                </Link>
+                <Link to={ routes.register }>
+                    <Button style_extra="mr-2 mt-4 md:mt-0" style_button="inline-flex items-center text-white bg-color-2 px-3 py-2" option="Regístrate" />
+                </Link>
                 
                 <div class="dropdown relative inline-block text-left">
                     <button type="button" class="inline-flex justify-center w-full rounded-md border-0 shadow-sm px-3 py-2 bg-white hover:bg-gray-50 focus:outline-none" aria-expanded="true" aria-haspopup="true">
