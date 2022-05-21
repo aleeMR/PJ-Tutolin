@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -65,32 +66,23 @@ const RegisterPage = () => {
         // Validación de la contraseña repetida
         if(!values.password_repeat)
             errors.password_repeat = 'Este campo es necesario';
-        else if(values.password_repeat != values.password)
+        else if(values.password_repeat !== values.password)
             errors.password_repeat = 'La contraseña no coincide';
 
         return errors;
     };
 
     const register = () => {
-        fetch(`${ process.env.REACT_APP_SERVER }/api/auth/signup`, {
-            mode: 'cors',
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(values)
-        })
-            .then(async (res) => {
-                if (res.ok) {
-                    const data = await res.json();
-                    const email = data.userSaved.email;
-                    const password = data.userSaved.password;
-                    const token = data.token;
-                    login({ email, password, token }, location.state?.from);
-                }
-            })
-            .catch(err => console.error(err));
+        axios.post(`${ process.env.REACT_APP_SERVER }/api/auth/signup`, values)
+            .then(res => {
+                const data = res.data;
+                console.log(data)
+                const user = data.userSaved;
+                const token = data.token;
+                localStorage.setItem('tl-user', JSON.stringify(user));
+                localStorage.setItem('tl-token', token);
+                login({ user, token }, location.state?.from);
+            }).catch(err => console.error(err));
     };
 
     return (

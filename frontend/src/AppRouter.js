@@ -1,8 +1,10 @@
-import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 // Helpers
 import roles from './helpers/roles';
 import routes from './helpers/routes';
+import useAuth from './auth/useAuth';
 
 // Validación de Rutas
 import PublicRoute from './routers/PublicRoute';
@@ -17,6 +19,17 @@ import RegisterPage from './pages/RegisterPage';
 import LayoutClient from './layouts/LayoutClient';
 
 function AppRouter() {
+  const { login } = useAuth();
+  const location = useLocation();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('tl-user'));
+    const token = localStorage.getItem('tl-token');
+
+    if (user && token)
+      login({ user, token }, location.state?.from);
+  }, []);
+
   return (
     <LayoutClient>
       <Routes>

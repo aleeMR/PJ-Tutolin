@@ -13,8 +13,14 @@ function AuthProvider({ children }) {
 
     // Función de iniciar sesión
     const login = (userCredentials, fromLocation) => {
-        setUser({ id: 1, role: roles.student });
-
+        setUser({ 
+            id: userCredentials.user._id, 
+            name: userCredentials.user.name,
+            surname: userCredentials.user.surname,
+            email: userCredentials.user.email,
+            token: userCredentials.token, 
+            role: roles.student
+        });
         // Si existe ruta anterior, redirecciona la página ahí
         if (fromLocation)
             navigate(fromLocation);
@@ -24,8 +30,9 @@ function AuthProvider({ children }) {
     const logout = () => setUser(null);
 
     const isLogged = () => !!user;
-    const hasRole = (role) => user?.role === role;
 
+    const hasRole = (role) => user?.role === role;
+    
     const contextValue = {
         user,
         login,
