@@ -13,6 +13,12 @@ const Navbar = () => {
     const { user, isLogged } = useAuth();
     const { logout } = useAuth();
 
+    const signOff = () => {
+        localStorage.removeItem('tl-user');
+        localStorage.removeItem('tl-token');
+        logout();
+    };
+
     return (
         <header className="text-gray-600 body-font bg-gray-100">
             <div className="container mx-auto flex flex-wrap px-5 py-3 flex-col md:flex-row items-center">
@@ -49,7 +55,7 @@ const Navbar = () => {
                                     <Option link={routes.home} style_link="text-gray-700 block px-4 py-2 text-sm" option="Panel de Tutor" />
                                 </li>
                                 <li className="py-1" role="none">
-                                    <Option link={routes.home} style_link="text-gray-700 block px-4 py-2 text-sm" option="Cerrar sesión" oClick={ logout } />
+                                    <Option link={routes.home} style_link="text-gray-700 block px-4 py-2 text-sm" option="Cerrar sesión" onClick={ signOff } />
                                 </li>
                             </ul>
                         </div>
