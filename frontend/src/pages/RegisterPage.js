@@ -76,7 +76,6 @@ const RegisterPage = () => {
         axios.post(`${ process.env.REACT_APP_SERVER }/api/auth/signup`, values)
             .then(res => {
                 const data = res.data;
-                console.log(data)
                 const user = data.userSaved;
                 const token = data.token;
                 localStorage.setItem('tl-user', JSON.stringify(user));
