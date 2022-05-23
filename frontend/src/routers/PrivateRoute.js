@@ -6,20 +6,15 @@ import useAuth from '../auth/useAuth';
 // Helpers
 import routes from '../helpers/routes';
 
-function PrivateRoute({ hasRole: role, ...rest }) {
+function PrivateRoute({ hasRole: role, children }) {
     // Constante que guarda la ruta anterior visitada
     const location = useLocation();
-    const { hasRole, isLogged } = useAuth();
-
-    if (role && !hasRole(role)) 
-        return <Navigate to={ routes.home } />
+    const { isLogged } = useAuth();
 
     if (!isLogged())
         return <Navigate to={ routes.login } state={{ from: location }} />
 
-    return (
-        <Route { ...rest } />
-    );
+    return children;
 };
         
 export default PrivateRoute;

@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 
-// Environment Variables (Variables de entorno)
-require('dotenv').config();
-
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true

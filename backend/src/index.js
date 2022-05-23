@@ -1,12 +1,12 @@
-const express = require('express');
+// Environment Variables (Variables de entorno)
+require('dotenv').config();
+
 const cors = require('cors');
+const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 
-const { mongoose } = require('./database');
-
-// Environment Variables (Variables de entorno)
-require('dotenv').config();
+const { mongoose } = require('./config/mongodb');
 
 const app = express();
 const whiteList = [process.env.HTTP];
@@ -24,6 +24,8 @@ app.use(cors({ origin: whiteList }));
 app.use(morgan('dev'));
 // Para verificar si los datos provienen en formato json
 app.use(express.json());
+// Para procesar solo datos en formato de texto
+app.use(express.urlencoded({ extended: false }));
 
 // Routes (Rutas)
 // ---------------------------------------------------------------

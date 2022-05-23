@@ -42,3 +42,7 @@ body {
 .bg-color-3, .bg-color-2:hover {
   background-color: var(--color-3);
 }
+
+input[type="file"] {
+  display: none;
+}

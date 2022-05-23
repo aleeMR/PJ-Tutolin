@@ -1,30 +1,93 @@
+const fs = require('fs-extra');
+const cloudinary = require('../config/cloudinary');
+
+// Importando modelos
 const Tutor = require('../models/tutor');
 
-// Método para crear el perfil del tutor
+// Método para crear o actualizar el perfil del tutor
 const createTutor = async (req, res) => {
     const {
         name,
         surname,
-        document,
         country,
         city,
-        biography
+        biography,
+        network
     } = req.body;
 
-    const tutor = new Tutor({
+    // Buscamos al tutor y actualizamos sus datos si es que existe
+    let tutor = await Tutor.findOneAndUpdate({ user_id: req.params.id }, { 
         name,
         surname,
-        document,
         country,
         city,
-        biography
-    });
-    // Guardamos el perfil del tutor en la BD
-    const tutorSaved = await tutor.save();
+        biography,
+        network }, { new: true });
+    let msgResp = "Perfil de tutor actualizado exitosamente.";
+
+    // Si es que el tutor no existe
+    if (!tutor) {
+        const newTutor = new Tutor({
+            name,
+            surname,
+            country,
+            city,
+            biography,
+            network,
+            user_id: req.params.id
+        });
+        // Guardamos el perfil del tutor en la BD
+        tutor = await newTutor.save();
+        msgResp = "Perfil de tutor creado exitosamente.";
+    }
 
     res.status(200).json({
-        tutorSaved,
-        msg: "Perfil de tutor creado exitosamente."
+        tutor,
+        msg: msgResp
+    });
+};
+
+// Método para subir la imagen del tutor
+const uploadAvatar = async (req, res) => {
+    let result = '';
+    // Si se subio una imagen
+    if (req.file) {
+        // La cargamos a la base de datos
+        result = await cloudinary.v2.uploader.upload(req.file.path);
+        // Y la eliminamos del repositorio local
+        await fs.unlink(req.file.path);
+    }
+
+    // Buscamos al tutor y actualizamos sus datos si es que existe
+    let tutor = await Tutor.findOneAndUpdate({ user_id: req.params.id }, { 
+        image: result.secure_url
+    }, { new: true });
+
+    // Si es que el tutor no existe
+    if (!tutor)
+        return res.status(400).json({
+            msg: "Tutor no existe."
+        });
+
+    res.status(200).json({
+        tutor,
+        msg: "Imagen cargada exitosamente."
+    });
+};
+
+// Método para cargar perfil del tutor
+const loadTutor = async (req, res) => {
+    const tutor = await Tutor.findOne({ user_id: req.params.id });
+
+    // Si es que el tutor no existe
+    if (!tutor)
+        return res.status(400).json({
+            msg: "Tutor no existe."
+        });
+
+    res.status(200).json({
+        tutor,
+        msg: "Perfil de tutor cargado exitosamente."
     });
 };
 
@@ -41,5 +104,7 @@ const listTutors = async (req, res) => {
 
 module.exports = {
     createTutor,
+    uploadAvatar,
+    loadTutor,
     listTutors
 }

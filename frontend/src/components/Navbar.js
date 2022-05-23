@@ -35,7 +35,7 @@ const Navbar = () => {
                                 <Button style_extra="mr-2 mt-4 md:mt-0" style_button="inline-flex items-center bg-gray-200 hover:bg-gray-300 px-3 py-2" option="Iniciar Sesión" />
                             </Link>
                             <Link to={ routes.register }>
-                                <Button style_extra="mr-2 mt-4 md:mt-0" style_button="inline-flex items-center text-white bg-color-2 px-3 py-2" option="Regístrate" />
+                                <Button style_extra="mt-4 md:mt-0" style_button="inline-flex items-center text-white bg-color-2 px-3 py-2" option="Regístrate" />
                             </Link>
                         </div>
                     :
@@ -48,11 +48,8 @@ const Navbar = () => {
                             </button>
                             <ul className="dropdown-menu absolute hidden origin-top-right right-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-[100]" aria-labelledby="menu-button">
                                 <li className="py-1" role="none">
-                                    <Option link={routes.home} style_link="text-gray-700 block px-4 py-2 text-sm" option="Mi cuenta" />
-                                    <Option link={routes.home} style_link="text-gray-700 block px-4 py-2 text-sm" option="Mis solicitudes" />
-                                </li>
-                                <li className="py-1" role="none">
-                                    <Option link={routes.home} style_link="text-gray-700 block px-4 py-2 text-sm" option="Panel de Tutor" />
+                                    <Option link={ routes.panel.profile } style_link="text-gray-700 block px-4 py-2 text-sm" option="Mi perfil" />
+                                    <Option link={routes.home} style_link="text-gray-700 block px-4 py-2 text-sm" option="Mis servicios" />
                                 </li>
                                 <li className="py-1" role="none">
                                     <Option link={routes.home} style_link="text-gray-700 block px-4 py-2 text-sm" option="Cerrar sesión" onClick={ signOff } />

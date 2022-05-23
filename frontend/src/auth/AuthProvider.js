@@ -2,9 +2,6 @@ import { createContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-// Helpers
-import roles from '../helpers/roles';
-
 export const AuthContext = createContext();
 
 function AuthProvider({ children }) {
@@ -18,8 +15,7 @@ function AuthProvider({ children }) {
             name: userCredentials.user.name,
             surname: userCredentials.user.surname,
             email: userCredentials.user.email,
-            token: userCredentials.token, 
-            role: roles.student
+            token: userCredentials.token
         });
         // Si existe ruta anterior, redirecciona la página ahí
         if (fromLocation)
@@ -30,15 +26,12 @@ function AuthProvider({ children }) {
     const logout = () => setUser(null);
 
     const isLogged = () => !!user;
-
-    const hasRole = (role) => user?.role === role;
     
     const contextValue = {
         user,
         login,
         logout,
-        isLogged,
-        hasRole
+        isLogged
     };
 
     return (

@@ -13,23 +13,19 @@ const TutorSchema = new Schema({
         required: true 
     },
     document: {
-        type: String,
-        required: true
+        type: String
     },
     image: {
         type: String
     },
     country: {
-        type: String,
-        required: true
+        type: String
     },
     city: {
-        type: String,
-        required: true
+        type: String
     },
     biography: {
-        type: String,
-        required: true
+        type: String
     },
     network: {
         website1: { 
@@ -50,6 +46,11 @@ const TutorSchema = new Schema({
         github: { 
             type: String 
         }
+    },
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 }, {
     timestamps: true,

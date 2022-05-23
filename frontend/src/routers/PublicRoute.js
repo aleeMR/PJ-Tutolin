@@ -10,7 +10,7 @@ function PublicRoute({ children }) {
     const { isLogged } = useAuth();
 
     if (isLogged()) 
-        return <Navigate to={ routes.home } replace />
+        return <Navigate to={ routes.panel.profile } replace />
 
     return children;
 };
