@@ -43,6 +43,11 @@ const CoursePage = () => {
         });
     };
 
+    const handleImage = (e) => {
+        const file = e.target.files[0];
+        setImage({ file, preview: URL.createObjectURL(file) });
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors(validate(values));
@@ -58,11 +63,17 @@ const CoursePage = () => {
         // Validación de la descripción
         if(!values.description.trim())
             errors.description = 'Este campo es necesario';
+        // Validación del precio
+        if(!values.price.trim())
+            errors.price = 'Este campo es necesario';
+        // Validación de la cantidad máxima
+        if(!values.quantity_max.trim())
+            errors.quantity_max = 'Este campo es necesario';
 
         return errors;
     };
 
-    const loadTutor = () => {
+    const loadServices = () => {
         axios.get(`${ process.env.REACT_APP_SERVER }/api/tutors/${ user.id }`)
             .then(res => {
                 const data = res.data;
@@ -84,24 +95,31 @@ const CoursePage = () => {
             }).catch(err => console.error(err));
     };
 
-    const createService = () => {
-        let service_id;
+    const createService = async () => {
+        const data = {
+            title: values.title,
+            description: values.description,
+            price: parseFloat(values.price),
+            quantity_max: parseInt(values.quantity_max)
+        };
         const img = new FormData();
-        img.append('image', image);
+        img.append('image', image.file);
+        let service_id;
+        const tutor_id = localStorage.getItem('tl-tutor');
 
-        axios.post(`${ process.env.REACT_APP_SERVER }/api/services`, values, {
+        await axios.post(`${ process.env.REACT_APP_SERVER }/api/services/${ tutor_id }`, data, {
                 headers: {
                     'x-access-token': localStorage.getItem('tl-token')
                 }
             })
             .then(res => {
                 const data = res.data;
-                service_id = data.service._id;
+                service_id = data.serviceSaved._id;
                 const msg = data.msg;
                 alert(msg);
             }).catch(err => console.error(err));
 
-        axios.post(`${ process.env.REACT_APP_SERVER }/api/services/${ service_id }`, img, {
+        await axios.put(`${ process.env.REACT_APP_SERVER }/api/services/${ service_id }`, img, {
                 headers: {
                     'x-access-token': localStorage.getItem('tl-token'),
                     'Content-Type': 'multipart/form-data'
@@ -114,10 +132,6 @@ const CoursePage = () => {
 
     const toggleTab = (index) => {
         setTabs(index);
-    };
-
-    const uploadImage = (e) => {
-        setImage(URL.createObjectURL(e.target.files[0]));
     };
 
     return (
@@ -165,15 +179,15 @@ const CoursePage = () => {
                                     <label className="leading-7 text-sm text-gray-600">Imagen</label>
                                     <div className="flex items-center">
                                         <label className="cursor-pointer bg-slate-50 hover:bg-slate-200 py-3 px-3 border border-gray-300 rounded-l-lg shadow-sm text-sm leading-4 font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                            <input type="file" name="image" onChange={ uploadImage } />
+                                            <input type="file" name="image" onChange={ handleImage } />
                                             Seleccionar...
                                         </label>
-                                        <input type="text" value="Prueba" className="w-full bg-white rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 leading-8" readOnly />
+                                        <input type="text" value={ image ? image.file.name : "" } className="w-full bg-white rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 leading-8" readOnly />
                                     </div>
                                 </div>
                                 <InputTextArea id="description" type="text" style_extra="col-span-2 row-span-2" label="Descripción" value={ values.description } onChange={ handleChange } errorMsg={ errors.description } />
-                                <InputNumber id="price" step=".01" style_extra="sm:col-span-1" label="Precio" value={ values.price } onChange={ handleChange } />
-                                <InputNumber id="quantity_max" style_extra="sm:col-span-1" label="Cantidad Máxima" value={ values.quantity_max } onChange={ handleChange } />
+                                <InputNumber id="price" step=".01" style_extra="sm:col-span-1" label="Precio" value={ values.price } onChange={ handleChange } errorMsg={ errors.price } />
+                                <InputNumber id="quantity_max" style_extra="sm:col-span-1" label="Cantidad Máxima" value={ values.quantity_max } onChange={ handleChange } errorMsg={ errors.quantity_max } />
                             </div>
                             <div className="w-full inline-flex justify-end">
                                 <Button style_extra="text-gray-400 hover:text-gray-900" type="submit" style_button="px-8 py-2 text-white text-lg bg-color-2" option="Publicar" />

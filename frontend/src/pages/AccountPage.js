@@ -112,7 +112,6 @@ const AccountPage = () => {
     const createTutor = async () => {
         const img = new FormData();
         img.append('image', image.file);
-        console.log(img)
 
         let dataTutor = {
             name: values.name,

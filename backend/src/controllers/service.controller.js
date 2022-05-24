@@ -1,3 +1,6 @@
+const fs = require('fs-extra');
+const cloudinary = require('../config/cloudinary');
+
 const Service = require('../models/service');
 
 // Método para listar todos los servicios
@@ -24,7 +27,8 @@ const createService = async (req, res) => {
         title,
         description,
         price,
-        quantity_max
+        quantity_max,
+        tutor_id: req.params.id
     });
     // Guardamos el servicio en la BD
     const serviceSaved = await service.save();
@@ -47,7 +51,7 @@ const uploadPhoto = async (req, res) => {
     }
 
     // Buscamos el servicio y actualizamos su foto si es que existe
-    let service = await Service.findById(req.params.id, { 
+    let service = await Service.findByIdAndUpdate(req.params.id, { 
         image: result.secure_url
     }, { new: true });
 
