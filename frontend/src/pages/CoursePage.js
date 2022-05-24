@@ -88,7 +88,7 @@ const CoursePage = () => {
             quantity_max: parseInt(values.quantity_max)
         };
         const img = new FormData();
-        img.append('image', image.file);
+        img.append('image', image?.file);
         let service_id;
         const tutor_id = localStorage.getItem('tl-tutor');
 
@@ -103,7 +103,7 @@ const CoursePage = () => {
                 const msg = data.msg;
                 alert(msg);
             }).catch(err => console.error(err));
-
+        
         await axios.put(`${ process.env.REACT_APP_SERVER }/api/services/${ service_id }`, img, {
                 headers: {
                     'x-access-token': localStorage.getItem('tl-token'),
@@ -113,6 +113,20 @@ const CoursePage = () => {
             .then(res => {
                 const data = res.data;
             }).catch(err => console.error(err));
+    };
+
+    const deleteService = (service_id) => {
+        
+        axios.delete(`${ process.env.REACT_APP_SERVER }/api/services/${ service_id }`, {
+            headers: {
+                'x-access-token': localStorage.getItem('tl-token')
+            }
+        })
+        .then(res => {
+            const data = res.data;
+            const msg = data.msg;
+            alert(msg);
+        }).catch(err => console.error(err));
     };
 
     const toggleTab = (index) => {
@@ -130,8 +144,9 @@ const CoursePage = () => {
                         <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-400">
                             <li className="mr-2">
                                 <button type="button" className={ `inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 hover:bg-gray-200 group ${ tabs === 1 ? "text-gray-600 border-gray-300 bg-gray-200" : "" }` } onClick={ () => toggleTab(1) }>
-                                    <svg className="mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clipRule="evenodd"></path>
+                                    <svg className="mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500" fill="currentColor" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="none" d="M0 0h24v24H0z"/>
+                                        <path fillRule="evenodd" d="M21 18H6a1 1 0 0 0 0 2h15v2H6a3 3 0 0 1-3-3V4a2 2 0 0 1 2-2h16v16zm-5-9V7H8v2h8z"/> 
                                     </svg>
                                     Mis Servicios
                                 </button>
@@ -154,7 +169,7 @@ const CoursePage = () => {
                                     <div className="bg-white rounded border border-gray-300 mb-5" key={ service._id }>
                                         <div className="max-w-2xl mx-auto items-center grid grid-cols-1 gap-x-8 sm:gap-x-0 lg:max-w-7xl lg:grid-cols-3">
                                             <div className="col-span-1 w-full">
-                                                <img src={ service.image ? service.image : require("../assets/img/avatar.png") } alt={ service.title } />
+                                                <img src={ service.image ? service.image : require("../assets/img/curso.png") } alt={ service.title } />
                                             </div>
                                             <div className="col-span-2 py-4 px-4 sm:px-6 sm:py-6 lg:px-8">
                                                 <h3 className="text-xl font-bold text-gray-900 sm:text-2xl">
@@ -164,7 +179,7 @@ const CoursePage = () => {
                                                     { service.description }
                                                 </p>
                                                 <div className="w-full inline-flex justify-end">
-                                                    <Button style_extra="mt-5 text-gray-400 hover:text-gray-900" type="button" style_button="px-8 py-2 text-white text-base bg-color-4" option="Eliminar" />
+                                                    <Button style_extra="mt-5 text-gray-400 hover:text-gray-900" type="button" onClick={ () => deleteService(service._id) } style_button="px-8 py-2 text-white text-base bg-color-4" option="Eliminar" />
                                                 </div>
                                             </div>
                                             

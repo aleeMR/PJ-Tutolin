@@ -19,4 +19,7 @@ router.post('/:id', verifyToken, ServiceCtrl.createService);
 // Ruta para subir la imagen del servicio
 router.put('/:id', verifyToken, uploadImage, ServiceCtrl.uploadPhoto);
 
+// Ruta para borrar un servicio
+router.delete('/:id', verifyToken, ServiceCtrl.deleteService);
+
 module.exports = router;
