@@ -24,6 +24,7 @@ const LoginPage = () => {
     useEffect(() => {
         if(Object.keys(errors).length === 0 && submitted) {
             logIn();
+            setSubmitted(false);
         }
     }, [errors]);
 

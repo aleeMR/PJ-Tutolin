@@ -27,6 +27,7 @@ const RegisterPage = () => {
     useEffect(() => {
         if(Object.keys(errors).length === 0 && submitted) {
             register();
+            setSubmitted(false);
         }
     }, [errors]);
 
