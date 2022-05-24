@@ -49,7 +49,7 @@ const Navbar = () => {
                             <ul className="dropdown-menu absolute hidden origin-top-right right-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-[100]" aria-labelledby="menu-button">
                                 <li className="py-1" role="none">
                                     <Option link={ routes.panel.profile } style_link="text-gray-700 block px-4 py-2 text-sm" option="Mi perfil" />
-                                    <Option link={routes.home} style_link="text-gray-700 block px-4 py-2 text-sm" option="Mis servicios" />
+                                    <Option link={ routes.panel.courses } style_link="text-gray-700 block px-4 py-2 text-sm" option="Mis servicios" />
                                 </li>
                                 <li className="py-1" role="none">
                                     <Option link={routes.home} style_link="text-gray-700 block px-4 py-2 text-sm" option="Cerrar sesión" onClick={ signOff } />

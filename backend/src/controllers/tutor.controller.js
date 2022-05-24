@@ -58,8 +58,8 @@ const uploadAvatar = async (req, res) => {
         await fs.unlink(req.file.path);
     }
 
-    // Buscamos al tutor y actualizamos sus datos si es que existe
-    let tutor = await Tutor.findOneAndUpdate({ user_id: req.params.id }, { 
+    // Buscamos al tutor y actualizamos su avatar si es que existe
+    let tutor = await Tutor.findByIdAndUpdate(req.params.id, { 
         image: result.secure_url
     }, { new: true });
 

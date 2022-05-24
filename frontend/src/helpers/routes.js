@@ -7,7 +7,8 @@ const routes = {
     services: '/services',
     service: (serviceId) => serviceId ? `/services/:${serviceId}` : '/services/:serviceId',
     panel: {
-        profile: '/panel/profile'
+        profile: '/panel/profile',
+        courses: '/panel/courses'
     }
 };
 

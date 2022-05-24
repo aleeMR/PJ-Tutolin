@@ -10,10 +10,12 @@ import PublicRoute from './routers/PublicRoute';
 import PrivateRoute from './routers/PrivateRoute';
 
 // Páginas Generales
+import AccountPage from './pages/AccountPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import AccountPage from './pages/AccountPage';
+import CoursePage from './pages/CoursePage';
+
 
 // Layouts del Cliente
 import LayoutClient from './layouts/LayoutClient';
@@ -44,6 +46,7 @@ function AppRouter() {
         <Route exact path={ routes.service() } element="ServiceDetails" />
 
         <Route exact path={ routes.panel.profile } element={ <PrivateRoute><AccountPage /></PrivateRoute> } />
+        <Route exact path={ routes.panel.courses } element={ <PrivateRoute><CoursePage /></PrivateRoute> } />
       
         <Route path="*" element="NotFoundPage" />
       </Routes>

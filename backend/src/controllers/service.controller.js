@@ -16,13 +16,15 @@ const createService = async (req, res) => {
     const {
         title,
         description,
-        price
+        price,
+        quantity_max
     } = req.body;
 
     const service = new Service({
         title,
         description,
-        price
+        price,
+        quantity_max
     });
     // Guardamos el servicio en la BD
     const serviceSaved = await service.save();
@@ -33,7 +35,36 @@ const createService = async (req, res) => {
     });
 };
 
+// Método para subir la imagen del servicio
+const uploadPhoto = async (req, res) => {
+    let result = '';
+    // Si se subio una imagen
+    if (req.file) {
+        // La cargamos a la base de datos
+        result = await cloudinary.v2.uploader.upload(req.file.path);
+        // Y la eliminamos del repositorio local
+        await fs.unlink(req.file.path);
+    }
+
+    // Buscamos el servicio y actualizamos su foto si es que existe
+    let service = await Service.findById(req.params.id, { 
+        image: result.secure_url
+    }, { new: true });
+
+    // Si es que el servicio no existe
+    if (!service)
+        return res.status(400).json({
+            msg: "Tutor no existe."
+        });
+
+    res.status(200).json({
+        service,
+        msg: "Imagen cargada exitosamente."
+    });
+};
+
 module.exports = {
     listServices,
-    createService
+    createService,
+    uploadPhoto
 }
