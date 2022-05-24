@@ -10,6 +10,9 @@ const ServiceCtrl = require('../controllers/service.controller');
 // Ruta para listar todos los servicios
 router.get('/', ServiceCtrl.listServices);
 
+// Ruta para listar los servicios por tutor
+router.get('/:id', ServiceCtrl.listServicesByTutor);
+
 // Ruta para crear un servicio
 router.post('/:id', verifyToken, ServiceCtrl.createService);
 

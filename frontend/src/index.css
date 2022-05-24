@@ -8,6 +8,8 @@
   --color-1: #54BAB9;
   --color-2: #42A6A4;
   --color-3: #3D9997;
+  --color-4: #bd5458;
+  --color-4-dark: #9d3538;
 }
 
 body {
@@ -41,6 +43,14 @@ body {
 
 .bg-color-3, .bg-color-2:hover {
   background-color: var(--color-3);
+}
+
+.bg-color-4 {
+  background-color: var(--color-4);
+}
+
+.bg-color-4:hover {
+  background-color: var(--color-4-dark);
 }
 
 input[type="file"] {

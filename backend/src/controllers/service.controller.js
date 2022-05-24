@@ -14,6 +14,17 @@ const listServices = async (req, res) => {
     });
 };
 
+// Método para listar los servicios por tutor
+const listServicesByTutor = async (req, res) => {
+    // Obtenemos todos los servicios del tutor registrados
+    const services = await Service.find({ tutor_id: req.params.id });
+
+    res.status(200).json({
+        services,
+        msg: "Servicios cargados exitosamente."
+    });
+};
+
 // Método para crear un servicio
 const createService = async (req, res) => {
     const {
@@ -69,6 +80,7 @@ const uploadPhoto = async (req, res) => {
 
 module.exports = {
     listServices,
+    listServicesByTutor,
     createService,
     uploadPhoto
 }

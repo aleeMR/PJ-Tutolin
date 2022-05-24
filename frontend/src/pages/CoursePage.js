@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-// Importación de rutas
-import useAuth from '../auth/useAuth';
-
 // Importación de componentes
 import Button from '../components/Button';
 import InputNumber from '../components/InputNumber';
@@ -12,7 +9,6 @@ import InputText from '../components/InputText';
 import InputTextArea from '../components/InputTextArea';
 
 const CoursePage = () => {
-    const { user } = useAuth();
     const [values, setValues] = useState({
         title: '',
         description: '',
@@ -22,10 +18,11 @@ const CoursePage = () => {
     const [tabs, setTabs] = useState(1);
     const [image, setImage] = useState(null);
     const [errors, setErrors] = useState({});
+    const [services, setServices] = useState([]);
     const [submitted, setSubmitted] = useState(false);
     
     useEffect(() => {
-        //loadTutor();
+        loadServices();
       }, []);
 
     useEffect(() => {
@@ -74,24 +71,12 @@ const CoursePage = () => {
     };
 
     const loadServices = () => {
-        axios.get(`${ process.env.REACT_APP_SERVER }/api/tutors/${ user.id }`)
+        const tutor_id = localStorage.getItem('tl-tutor');
+
+        axios.get(`${ process.env.REACT_APP_SERVER }/api/services/${ tutor_id }`)
             .then(res => {
                 const data = res.data;
-                const tutor = data.tutor;
-                setValues({
-                    name: tutor.name,
-                    surname: tutor.surname,
-                    country: tutor.country ? tutor.country : '',
-                    city: tutor.city ? tutor.city : '',
-                    biography: tutor.biography ? tutor.biography : '',
-                    website1: tutor.network.website1 ? tutor.network.website1 : '',
-                    website2: tutor.website2 ? tutor.website : '',
-                    linkedin: tutor.network.linkedin ? tutor.network.linkedin : '',
-                    facebook: tutor.network.facebook ? tutor.network.facebook : '',
-                    youtube: tutor.network.youtube ? tutor.network.youtube : '',
-                    github: tutor.network.github ? tutor.network.github : ''
-                });
-                setImage(tutor.image);
+                setServices(data.services);
             }).catch(err => console.error(err));
     };
 
@@ -164,13 +149,29 @@ const CoursePage = () => {
                     </div>
                     <div id="tabsProfileContent">
                         <div className={ `p-4 rounded-lg ${ tabs === 1 ? "" : "hidden" }` }>
-                            <div className="grid grid-cols-2 gap-6 mb-10">
-                                <InputText id="name" type="text" style_extra="col-span-2 sm:col-span-1" label="Nombres" value={ values.name } onChange={ handleChange } errorMsg={ errors.name } />
-                                <InputText id="surname" type="text" style_extra="col-span-2 sm:col-span-1" label="Apellidos" value={ values.surname } onChange={ handleChange } errorMsg={ errors.surname } />
-                                <InputSelect id="country" style_extra="col-span-2 sm:col-span-1" label="País" valueSelect={ values.country } options={ [{ title: '' }, { title: "Colombia" }, { title: "Perú" }] } onChange={ handleChange } />
-                                <InputText id="city" type="text" style_extra="col-span-2 sm:col-span-1" label="Ciudad" value={ values.city } onChange={ handleChange } />
-                                <InputText id="biography" type="text" style_extra="col-span-2" label="Biografía" value={ values.biography } onChange={ handleChange } />
-                            </div>
+                            {
+                                services.map((service) => 
+                                    <div className="bg-white rounded border border-gray-300 mb-5" key={ service._id }>
+                                        <div className="max-w-2xl mx-auto items-center grid grid-cols-1 gap-x-8 sm:gap-x-0 lg:max-w-7xl lg:grid-cols-3">
+                                            <div className="col-span-1 w-full">
+                                                <img src={ service.image ? service.image : require("../assets/img/avatar.png") } alt={ service.title } />
+                                            </div>
+                                            <div className="col-span-2 py-4 px-4 sm:px-6 sm:py-6 lg:px-8">
+                                                <h3 className="text-xl font-bold text-gray-900 sm:text-2xl">
+                                                    { service.title }
+                                                </h3>
+                                                <p className="mt-2 text-gray-500">
+                                                    { service.description }
+                                                </p>
+                                                <div className="w-full inline-flex justify-end">
+                                                    <Button style_extra="mt-5 text-gray-400 hover:text-gray-900" type="button" style_button="px-8 py-2 text-white text-base bg-color-4" option="Eliminar" />
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                )
+                            }
                         </div>
                         <form onSubmit={ handleSubmit } encType="multipart/form-data" className={ `p-4 rounded-lg ${ tabs === 2 ? "" : "hidden" }` }>
                             <div className="grid grid-cols-3 gap-6 mb-10">
