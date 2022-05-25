@@ -16,6 +16,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ServicesPage from './pages/ServicesPage';
+import TutorsPage from './pages/TutorsPage';
 
 // Layouts del Cliente
 import LayoutClient from './layouts/LayoutClient';
@@ -39,7 +40,7 @@ function AppRouter() {
         <Route exact path={ routes.login } element={ <PublicRoute><LoginPage /></PublicRoute> } />
         <Route exact path={ routes.register } element={ <PublicRoute><RegisterPage /></PublicRoute> } />
 
-        <Route exact path={ routes.tutors } element="TutorsPage" />
+        <Route exact path={ routes.tutors } element={ <TutorsPage /> } />
         <Route exact path={ routes.tutor() } element="TutorPerfil" />
         
         <Route exact path={ routes.services } element={ <ServicesPage /> } />
