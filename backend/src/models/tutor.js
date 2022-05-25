@@ -28,6 +28,12 @@ const TutorSchema = new Schema({
         type: String
     },
     network: {
+        mobile: {
+            type: String
+        },
+        webemail: {
+            type: String
+        },
         website1: { 
             type: String 
         },

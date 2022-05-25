@@ -18,6 +18,8 @@ const AccountPage = () => {
         country: '',
         city: '',
         biography: '',
+        mobile: '',
+        webemail: '',
         website1: '',
         website2: '',
         linkedin: '',
@@ -85,6 +87,8 @@ const AccountPage = () => {
                     country: tutor.country ? tutor.country : '',
                     city: tutor.city ? tutor.city : '',
                     biography: tutor.biography ? tutor.biography : '',
+                    mobile: tutor.network.mobile ? tutor.network.mobile : '',
+                    webemail: tutor.network.webemail ? tutor.network.webemail : '',
                     website1: tutor.network.website1 ? tutor.network.website1 : '',
                     website2: tutor.website2 ? tutor.website : '',
                     linkedin: tutor.network.linkedin ? tutor.network.linkedin : '',
@@ -120,6 +124,8 @@ const AccountPage = () => {
             city: values.city,
             biography: values.biography,
             network: {
+                mobile: values.mobile,
+                webemail: values.webemail,
                 website1: values.website1,
                 website2: values.website2,
                 linkedin: values.linkedin,
@@ -208,6 +214,8 @@ const AccountPage = () => {
                         </div>
                         <div className={ `p-4 rounded-lg ${ tabs === 2 ? "" : "hidden" }` }>
                             <div className="grid grid-cols-2 gap-6 mb-10">
+                                <InputText id="mobile" type="text" style_extra="col-span-2 sm:col-span-1" label="Celular:" value={ values.mobile } onChange={ handleChange } />
+                                <InputText id="webemail" type="email" style_extra="col-span-2 sm:col-span-1" label="Correo:" value={ values.webemail } onChange={ handleChange } />
                                 <InputText id="website1" type="text" style_extra="col-span-2 sm:col-span-1" label="Sitio Web 1" value={ values.website1 } onChange={ handleChange } />
                                 <InputText id="website2" type="text" style_extra="col-span-2 sm:col-span-1" label="Sitio Web 2" value={ values.website2 } onChange={ handleChange } />
                                 <InputText id="linkedin" type="text" style_extra="col-span-2 sm:col-span-1" label="Linkedin" value={ values.linkedin } onChange={ handleChange } />
