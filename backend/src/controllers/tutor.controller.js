@@ -75,9 +75,25 @@ const uploadAvatar = async (req, res) => {
     });
 };
 
-// Método para cargar perfil del tutor
+// Método para cargar perfil del tutor activo
 const loadTutor = async (req, res) => {
     const tutor = await Tutor.findOne({ user_id: req.params.id });
+
+    // Si es que el tutor no existe
+    if (!tutor)
+        return res.status(400).json({
+            msg: "Tutor no existe."
+        });
+
+    res.status(200).json({
+        tutor,
+        msg: "Perfil de tutor cargado exitosamente."
+    });
+};
+
+// Método para mostrar perfil de tutor
+const viewTutor = async (req, res) => {
+    const tutor = await Tutor.findById(req.params.id);
 
     // Si es que el tutor no existe
     if (!tutor)
@@ -106,5 +122,6 @@ module.exports = {
     createTutor,
     uploadAvatar,
     loadTutor,
+    viewTutor,
     listTutors
 }

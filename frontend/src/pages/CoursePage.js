@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 // Importación de componentes
 import Button from '../components/Button';
 import InputNumber from '../components/InputNumber';
-import InputSelect from '../components/InputSelect';
 import InputText from '../components/InputText';
 import InputTextArea from '../components/InputTextArea';
 

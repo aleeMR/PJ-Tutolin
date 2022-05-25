@@ -13,8 +13,11 @@ router.post('/:id', verifyToken, TutorCtrl.createTutor);
 // Ruta para subir la imagen del tutor
 router.put('/:id', verifyToken, uploadImage, TutorCtrl.uploadAvatar);
 
-// Ruta para cargar perfil del tutor
+// Ruta para cargar perfil del tutor activo
 router.get('/:id', TutorCtrl.loadTutor);
+
+// Ruta para mostrar perfil de tutor
+router.get('/view/:id', TutorCtrl.viewTutor);
 
 // Ruta para listar todos los tutores
 router.get('/', TutorCtrl.listTutors);
