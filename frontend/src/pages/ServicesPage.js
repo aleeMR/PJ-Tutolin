@@ -54,8 +54,15 @@ const ServicesPage = () => {
                                         <span aria-hidden="true" className="absolute inset-0"></span>
                                         { service.title }
                                     </h3>
-                                    <p className="text-sm font-medium text-gray-900">S/. { service.price }</p>
+                                    <div className="flex justify-end">
+                                        <svg className="text-gray-800 mt-1 w-3.5 h-3.5 bi bi-person-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                        </svg>
+                                        <p className="ml-1 text-sm font-medium text-gray-900">{ service.quantity_max }</p>
+                                        <p className="ml-4 text-sm font-medium text-gray-900">S/. { service.price }</p>
+                                    </div>
                                 </div>
+                                <p className="mx-4 my-2 text-sm text-gray-500">{ service.description }</p>
                                 <hr />
                                 <p className="mx-4 my-2 text-sm text-gray-500">{ service.tutor_id.name + " " + service.tutor_id.surname }</p>
                             </div>
